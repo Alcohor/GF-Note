@@ -1,0 +1,16 @@
+.app-home {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  .app-common-layout-wrap {
+    height: 100%;
+  }
+  .app-common-layout-wrap.nav {
+    width: 360px;
+    flex:0 0 auto;
+  }
+  .app-common-layout-wrap.content {
+    min-width: 700px;
+    flex-grow: 1;
+  }
+}
