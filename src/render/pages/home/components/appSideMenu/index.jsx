@@ -2,15 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.scss'
 import { Layout, Menu, Breadcrumb, Icon, Switch } from 'antd';
+import { withRouter } from 'react-router-dom'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
+
 class AppMenu extends React.Component {
-  state = {
-    collapsed: false,
-    theme: 'dark',
-    current: '1',
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      collapsed: false,
+      theme: 'dark',
+      current: 'note-book',
+    };
+  }
 
   changeTheme = value => {
     this.setState({
@@ -23,6 +28,7 @@ class AppMenu extends React.Component {
     this.setState({
       current: e.key,
     });
+    this.props.history.push(e.key)
   };
 
   onCollapse = collapsed => {
@@ -33,16 +39,11 @@ class AppMenu extends React.Component {
   render() {
     return (
       <div className="app-side-menu">
-        <Menu style={{ height:'100%' }} theme={this.state.theme} defaultSelectedKeys={['1']} mode="inline">
-
-          <Menu.Item key="1">
+        <Menu onClick={this.handleClick} style={{ height:'100%' }} theme={this.state.theme} defaultSelectedKeys={['1']} mode="inline">
+          <Menu.Item key="user">
             <Icon type="user" />
             <span>我的</span>
           </Menu.Item>
-          {/* <Menu.Item key="2">
-            <Icon type="desktop" />
-            <span>Option 2</span>
-          </Menu.Item> */}
           <SubMenu
             key="sub1"
             title={
@@ -56,18 +57,6 @@ class AppMenu extends React.Component {
             <Menu.Item key="4">Bill</Menu.Item>
             <Menu.Item key="5">Alex</Menu.Item>
           </SubMenu>
-          {/* <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <Icon type="team" />
-                <span>Team</span>
-              </span>
-            }
-          >
-            <Menu.Item key="6">Team 1</Menu.Item>
-            <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu> */}
           <Menu.Item key="9">
             <Icon type="star" />
             <span>收藏</span>
@@ -97,4 +86,4 @@ class AppMenu extends React.Component {
 let menuDom = document.createElement('div')
 ReactDOM.render(<AppMenu />, menuDom);
 
-export default AppMenu;
+export default withRouter(AppMenu);

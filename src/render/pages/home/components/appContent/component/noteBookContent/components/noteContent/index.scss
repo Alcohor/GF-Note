@@ -1,9 +1,9 @@
 .app-main-content {
-  width: 100%;
   height: 100%;
   border-left: 1px solid #e8e8e8;
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto;
   #editor {
     min-height: 400px;
     flex: 1 0 auto;

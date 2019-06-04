@@ -1,0 +1,14 @@
+.note-header {
+  height: 100px;
+  .note-title {
+    text-align: center;
+    color: #666;
+  }
+  .more-note-info {
+    padding: 0 20px;
+    font-size: 12px;
+    .create-time {
+      margin-right: 20px;
+    }
+  }
+}
