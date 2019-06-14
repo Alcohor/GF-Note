@@ -24,11 +24,19 @@ class AppMenu extends React.Component {
   };
 
   handleClick = e => {
-    console.log('click ', e);
     this.setState({
       current: e.key,
     });
-    this.props.history.push(e.key)
+    let routerQuery = {};
+    let noteBookReg = /^(book-)/;
+    let target = e.key
+    if (noteBookReg.test(e.key)) {
+      target = 'book'
+      routerQuery.bookId = e.key.split('-')[1];
+    }
+    let pathname = `/${target}${routerQuery.bookId ? `/${routerQuery.bookId}` : ''}`
+    this.props.history.push({pathname: pathname, state: routerQuery});
+    console.log(this.props)
   };
 
   onCollapse = collapsed => {
@@ -40,12 +48,12 @@ class AppMenu extends React.Component {
     return (
       <div className="app-side-menu">
         <Menu onClick={this.handleClick} style={{ height:'100%' }} theme={this.state.theme} defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="user">
+          <Menu.Item name="user" key="user">
             <Icon type="user" />
             <span>我的</span>
           </Menu.Item>
           <SubMenu
-            key="sub1"
+            key="book"
             title={
               <span>
                 <Icon type="book" />
@@ -53,19 +61,19 @@ class AppMenu extends React.Component {
               </span>
             }
           >
-            <Menu.Item key="3">Tom</Menu.Item>
-            <Menu.Item key="4">Bill</Menu.Item>
-            <Menu.Item key="5">Alex</Menu.Item>
+            <Menu.Item key="book-1">Tom</Menu.Item>
+            <Menu.Item key="book-2">Bill</Menu.Item>
+            <Menu.Item key="book-3">Alex</Menu.Item>
           </SubMenu>
-          <Menu.Item key="9">
+          <Menu.Item key="mark">
             <Icon type="star" />
             <span>收藏</span>
           </Menu.Item>
-          <Menu.Item key="11">
+          <Menu.Item key="setting">
             <Icon type="setting" />
             <span>设置</span>
           </Menu.Item>
-          <Menu.Item key="12">
+          <Menu.Item key="export">
             <Icon type="to-top" />
             <span>导出</span>
           </Menu.Item>

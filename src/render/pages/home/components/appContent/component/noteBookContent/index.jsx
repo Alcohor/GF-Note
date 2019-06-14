@@ -10,6 +10,7 @@ class NoteBookContent extends React.Component {
     return (
       <div className="note-book-content">
         <Nav/>
+        { this.props.match.params.bookId }
         <NoteContent/>
       </div>
     )
